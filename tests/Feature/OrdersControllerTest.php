@@ -8,16 +8,6 @@ use Tests\TestCase;
 class OrdersControllerTest extends TestCase
 {
     /**
-     * A basic feature test example.
-     */
-    public function test_example(): void
-    {
-        $response = $this->get('/');
-
-        $response->assertStatus(200);
-    }
-
-    /**
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(成功) 
      * 
      * @see \App\Http\Controllers\OrdersController

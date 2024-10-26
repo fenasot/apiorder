@@ -14,7 +14,7 @@ docker-compose build
 docker-compose up -d
 ```
 
-提供了 `http://localhost:8080/api/test` 的api測試頁面，可使用該頁面測試 `http://localhost:8080/api/orders` 的 post 請求
+提供了 `http://localhost:8080/testapi` 的api測試頁面，可使用該頁面測試 `http://localhost:8080/api/orders` 的 post 請求
 
 這是提供的範例 json 資料
 ``` json

@@ -8,6 +8,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('/api/test', function () {
+Route::get('/testapi', function () {
     return view('testapi');
 });
