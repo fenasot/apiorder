@@ -17,26 +17,17 @@ class OrderService implements OrderServiceInterface
     {
         // 檢查 name 是否只包含英文字母與空格
         if (isset($data['name']) && !$this->containsOnlyEnglishLetters($data['name'])) {
-            return [
-                'status' => 'error',
-                'message' => 'Name contains non-English characters',
-            ];
+            return $this->returnResult('error', 'Name contains non-English characters');
         }
 
         // 檢查 name 單字開頭是否大寫
         if (isset($data['name']) && !$this->isEachWordCapitalized($data['name'])) {
-            return [
-                'status' => 'error',
-                'message' => 'Name is not capitalized',
-            ];
+            return $this->returnResult('error', 'Name is not capitalized');
         }
 
         // 檢查 currency 是否是 TWD 或 USD
         if (isset($data['currency']) && !$this->isUsdOrTwd($data['currency'])) {
-            return [
-                'status' => 'error',
-                'message' => 'Currency format is wrong',
-            ];
+            return $this->returnResult('error', 'Currency format is wrong');
         }
 
         // 如果是 USD，將金額與貨幣欄位都轉換為 TWD 的格式
@@ -47,17 +38,10 @@ class OrderService implements OrderServiceInterface
 
         // 檢查 price 金額是否不超過 2000 且不小於 0 (包含轉換後)
         if (isset($data['price']) && !$this->isOverLimitPrice($data['price'])) {
-            return [
-                'status' => 'error',
-                'message' => 'Price is over 2000',
-            ];
+            return $this->returnResult('error', 'Price is over 2000');
         }
 
-        return [
-            'status' => 'success',
-            'message' => '訂單檢查通過',
-            'data' => $data
-        ];
+        return $this->returnResult('success', '訂單檢查通過', $data);
     }
 
     /**
@@ -125,15 +109,26 @@ class OrderService implements OrderServiceInterface
     }
 
     /**
-     * 執行並回傳結果
+     * 回傳結果訊息的統一介面
      * 
-     * @param string $message 錯誤訊息
-     * @param int $httpStatusCode Https 狀態碼
+     * @param string $status 成功或失敗
+     * @param string $message 訊息
+     * @param array $data 更該後的資料
+     * @return array
      */
-    private function jsonResponse(string $message, int $httpStatusCode)
+    private function returnResult(string $status, string $message, array $data = null): array
     {
-        throw new HttpResponseException(response()->json([
+        if ($data == null) {
+            return [
+                'status' => $status,
+                'message' => $message
+            ];
+        }
+
+        return [
+            'status' => $status,
             'message' => $message,
-        ], $httpStatusCode));
+            'data' => $data
+        ];
     }
 }

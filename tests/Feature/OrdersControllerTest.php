@@ -44,6 +44,29 @@ class OrdersControllerTest extends TestCase
     }
 
     /**
+     * OrdersController ordersCheck() 驗證Json格式是否正確功能(資料為空) 
+     * 
+     * @see \App\Http\Controllers\OrdersController
+     */
+    #[Test]
+    public function testOrdersConotrollerOrdersCheckInvaildJsonEmpty()
+    {
+        $response = $this->postJson('/api/orders', [
+            'id' => '',
+            'name' => '',
+            'address' => [
+                'city' => '',
+                'district' => '',
+                'street' => ''
+            ],
+            'price' => 0,
+            'currency' => ''
+        ]);
+
+        $response->assertStatus(422);
+    }
+
+    /**
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(id 欄位缺失)
      */
     #[Test]

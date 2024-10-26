@@ -18,6 +18,21 @@ class OrderServiceTest extends TestCase
     }
 
     /**
+     * 執行並確認結果(僅檢查 status 與 message)
+     * 
+     * @param array $data
+     * @param string $status
+     * @param string $message
+     */
+    private function runAndAssertEquals(array $data, string $status, string $message)
+    {
+        $result = $this->orderService->checkJson($data);
+
+        $this->assertEquals($status, $result['status']);
+        $this->assertEquals($message, $result['message']);
+    }
+
+    /**
      * OrderService checkJson() 驗證 json 格式的功能 (成功)  
      * 
      * @see \App\Services\OrderService
@@ -50,10 +65,7 @@ class OrderServiceTest extends TestCase
             'currency' => 'TWD'
         ];
 
-        $result = $this->orderService->checkJson($data);
-
-        $this->assertEquals('error', $result['status']);
-        $this->assertEquals('Name contains non-English characters', $result['message']);
+        $this->runAndAssertEquals($data, 'error', 'Name contains non-English characters');
     }
 
     /**
@@ -68,10 +80,7 @@ class OrderServiceTest extends TestCase
             'currency' => 'TWD'
         ];
 
-        $result = $this->orderService->checkJson($data);
-
-        $this->assertEquals('error', $result['status']);
-        $this->assertEquals('Name is not capitalized', $result['message']);
+        $this->runAndAssertEquals($data, 'error', 'Name is not capitalized');
     }
 
     /**
@@ -86,10 +95,7 @@ class OrderServiceTest extends TestCase
             'currency' => 'TWD'
         ];
 
-        $result = $this->orderService->checkJson($data);
-
-        $this->assertEquals('error', $result['status']);
-        $this->assertEquals('Price is over 2000', $result['message']);
+        $this->runAndAssertEquals($data, 'error', 'Price is over 2000');
     }
 
     /**
@@ -105,10 +111,7 @@ class OrderServiceTest extends TestCase
             'currency' => 'TDD' // 不是 TWD 或 USD
         ];
 
-        $result = $this->orderService->checkJson($data);
-
-        $this->assertEquals('error', $result['status']);
-        $this->assertEquals('Currency format is wrong', $result['message']);
+        $this->runAndAssertEquals($data, 'error', 'Currency format is wrong');
     }
 
 
