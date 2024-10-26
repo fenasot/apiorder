@@ -23,7 +23,7 @@ class OrderServiceTest extends TestCase
      * @see \App\Services\OrderService
      */
     #[Test]
-    public function testOrdersServiceCheckJsonSuccess()
+    public function testOrderServiceCheckJsonSuccess()
     {
         $data = [
             'name' => 'Melody Holiday Inn',
