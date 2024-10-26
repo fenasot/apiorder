@@ -300,7 +300,7 @@ class OrdersControllerTest extends TestCase
      * 貨幣格式如果是 USD，將修改price金額並乘上固定匯率 31，並轉為TWD)
      */
     #[Test]
-    public function testOrdersConotrollerOrdersCheckInvaildJsonDataCurrencyChangeTwdToUsd()
+    public function testOrdersConotrollerOrdersCheckVaildJsonDataCurrencyChangeTwdToUsd()
     {
         $price = 20; // USD 價格
 
