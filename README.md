@@ -40,7 +40,7 @@ docker-compose up -d
 * 使用了 OOAD 中的 SOLID、OOP、KISS、YAGNI、DRY  原則。
 * SOILD 的部分使用了
     * SRP: 將業務邏輯與功能邏輯分開撰寫，Controller負責驗證Json資料完整性，以及https的狀態碼回傳，Service負責驗證資料內容的正確性，以及回傳驗證結果。
-    * OCP: 使用了 Interface ，讓 orderservice 在之後需要擴充的情況下可不更改原有的程式碼。
+    * OCP: 使用了 Interface ，讓 OrderService 在之後需要擴充的情況下可不更改原有的程式碼。
     * DIP: 使用了依賴注入的方式注入了 OrderService。
 
 * KISS 原則: 在撰寫Api時，若不需要太複雜的邏輯，就盡量的使用較簡單的方式設計，不過度的追求完美的設計法則，導致降低程式碼的可讀性，以及過多開發成本。
