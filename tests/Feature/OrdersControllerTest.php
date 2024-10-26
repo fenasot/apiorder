@@ -19,9 +19,11 @@ class OrdersControllerTest extends TestCase
 
     /**
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(成功) 
+     * 
+     * @see \App\Http\Controllers\OrdersController
      */
     #[Test]
-    public function testOrdersCheckVaildJsonFormat()
+    public function testOrdersConotrollerOrdersCheckVaildJsonFormat()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -45,7 +47,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(id 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatId()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatId()
     {
         $response = $this->postJson('/api/orders', [
             // 少了 id
@@ -67,7 +69,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(name 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatAddressName()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatAddressName()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -89,7 +91,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(address.city 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatAddressCity()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatAddressCity()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -111,7 +113,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(address.district 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatAddressDistrict()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatAddressDistrict()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -133,7 +135,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(address.street 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatAddressStreet()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatAddressStreet()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -155,7 +157,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(price 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatAddressPrice()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatPrice()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -177,7 +179,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json格式是否正確功能(currency 欄位缺失)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonFormatAddressCurrency()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonFormatCurrency()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -200,7 +202,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json資料內容是否正確功能(name 欄位包含非英文字母或空格的字元)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonDataNameContainsOnlyEnglishLetters()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonDataNameContainsOnlyEnglishLetters()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -224,7 +226,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json資料內容是否正確功能(name 欄位每個單字首字母非大寫)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonDataNameIsNotCapitalized()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonDataNameIsNotCapitalized()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -248,7 +250,7 @@ class OrdersControllerTest extends TestCase
      * OrdersController ordersCheck() 驗證Json資料內容是否正確功能(price 欄位金額超過2000)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonDataPriceIsOverLimit()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonDataPriceIsOverLimit()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -273,7 +275,7 @@ class OrdersControllerTest extends TestCase
      * 貨幣格式不是 TWD 或 USD)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonDataCurrencyFormatIsWrong()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonDataCurrencyFormatIsWrong()
     {
         $response = $this->postJson('/api/orders', [
             'id' => 'A0000001',
@@ -298,7 +300,7 @@ class OrdersControllerTest extends TestCase
      * 貨幣格式如果是 USD，將修改price金額並乘上固定匯率 31，並轉為TWD)
      */
     #[Test]
-    public function testOrdersCheckInvaildJsonDataCurrencyChangeTwdToUsd()
+    public function testOrdersConotrollerOrdersCheckInvaildJsonDataCurrencyChangeTwdToUsd()
     {
         $price = 20; // USD 價格
 

@@ -12,7 +12,6 @@ class OrderService implements OrderServiceInterface
      * 驗證json資料內容是否正確，並轉換部分資料為統一的格式
      * 
      * @param array $data
-     * @throw HttpResponseException
      */
     public function checkJson(array $data): array
     {

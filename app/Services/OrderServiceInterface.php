@@ -4,5 +4,5 @@ namespace App\Services;
 
 interface OrderServiceInterface
 {
-    public function checkJson(array $data);
+    public function checkJson(array $data): ?array;
 }

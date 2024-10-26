@@ -19,6 +19,8 @@ class OrderServiceTest extends TestCase
 
     /**
      * OrderService checkJson() 驗證 json 格式的功能 (成功)  
+     * 
+     * @see \App\Services\OrderService
      */
     #[Test]
     public function testOrdersServiceCheckJsonSuccess()
