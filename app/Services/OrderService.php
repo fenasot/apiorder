@@ -18,23 +18,26 @@ class OrderService implements OrderServiceInterface
     {
         // 檢查 name 是否只包含英文字母與空格
         if (isset($data['name']) && !$this->containsOnlyEnglishLetters($data['name'])) {
-            throw new HttpResponseException(response()->json([
-                'message' => 'Name contains non-English characters'
-            ], 400));
+            return [
+                'status' => 'error',
+                'message' => 'Name contains non-English characters',
+            ];
         }
 
         // 檢查 name 單字開頭是否大寫
         if (isset($data['name']) && !$this->isEachWordCapitalized($data['name'])) {
-            throw new HttpResponseException(response()->json([
-                'message' => 'Name is not capitalized'
-            ], 400));
+            return [
+                'status' => 'error',
+                'message' => 'Name is not capitalized',
+            ];
         }
 
         // 檢查 currency 是否是 TWD 或 USD
         if (isset($data['currency']) && !$this->isUsdOrTwd($data['currency'])) {
-            throw new HttpResponseException(response()->json([
-                'message' => 'Currency format is wrong'
-            ], 400));
+            return [
+                'status' => 'error',
+                'message' => 'Currency format is wrong',
+            ];
         }
 
         // 如果是 USD，將金額與貨幣欄位都轉換為 TWD 的格式
@@ -45,18 +48,23 @@ class OrderService implements OrderServiceInterface
 
         // 檢查 price 金額是否不超過 2000 且不小於 0 (包含轉換後)
         if (isset($data['price']) && !$this->isOverLimitPrice($data['price'])) {
-            throw new HttpResponseException(response()->json([
-                'message' => 'Price is over 2000'
-            ], 400));
+            return [
+                'status' => 'error',
+                'message' => 'Price is over 2000',
+            ];
         }
 
-        return $data;
+        return [
+            'status' => 'success',
+            'message' => '訂單檢查通過',
+            'data' => $data
+        ];
     }
 
     /**
      * 檢查是否只包含英文字母與空格
      * 
-     * @param string string
+     * @param string $string
      * @return bool
      */
     private function containsOnlyEnglishLetters(string $string): bool
@@ -67,7 +75,7 @@ class OrderService implements OrderServiceInterface
     /**
      * 檢查每個單字是否都是大寫開頭
      * 
-     * @param string string
+     * @param string $string
      * @return bool
      */
     private function isEachWordCapitalized(string $string): bool
@@ -85,7 +93,7 @@ class OrderService implements OrderServiceInterface
     /**
      * 檢查金額是否大於 2000 且不小於 0
      * 
-     * @param float price
+     * @param float $price
      * @return bool
      */
     private function isOverLimitPrice(float $price): bool
@@ -96,7 +104,7 @@ class OrderService implements OrderServiceInterface
     /**
      * 檢查是否是 USD 或 TWD
      * 
-     * @param string string
+     * @param string $string
      * @return bool
      */
     private function isUsdOrTwd(string $string): bool
@@ -109,11 +117,24 @@ class OrderService implements OrderServiceInterface
     /**
      * 將金額從 USD 轉換為 TWD
      * 
-     * @param float price
+     * @param float $price
      * @return float
      */
     private function ChangePriceFromUsdToTwd(float $price): float
     {
         return $price * self::USD_TO_TWD_RATE;
+    }
+
+    /**
+     * 執行並回傳結果
+     * 
+     * @param string $message 錯誤訊息
+     * @param int $httpStatusCode Https 狀態碼
+     */
+    private function jsonResponse(string $message, int $httpStatusCode)
+    {
+        throw new HttpResponseException(response()->json([
+            'message' => $message,
+        ], $httpStatusCode));
     }
 }
