@@ -58,7 +58,7 @@ docker-compose up -d
 SELECT 
     o.bnb_id,
     o.bnb_name,
-    SUN(o.amount) AS may_amount
+    SUM(o.amount) AS may_amount
 FROM 
     orders o
 WHERE 
