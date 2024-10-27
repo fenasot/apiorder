@@ -81,15 +81,14 @@ WITH MayOrders AS (
     SELECT 
         o.bnb_id,
         o.bnb_name,
-        SUM(amount) AS may_amount
+        SUM(o.amount) AS may_amount
     FROM 
         orders o
     WHERE 
         o.order_date BETWEEN '2023-05-01' AND '2023-05-31'
-        AND currency = 'TWD'
+        AND o.currency = 'TWD'
     GROUP BY 
-        bnb_id,
-        bnb_name
+        o.bnb_id
 )
 SELECT 
     *
