@@ -85,8 +85,9 @@ WITH MayOrders AS (
     FROM 
         orders o
     WHERE 
-        o.order_date BETWEEN '2023-05-01' AND '2023-05-31'
-        AND o.currency = 'TWD'
+        o.currency = 'TWD' 
+        AND o.created_at >= '2023-05-01'
+        AND o.created_at < '2023-06/01'
     GROUP BY 
         o.bnb_id
 )
